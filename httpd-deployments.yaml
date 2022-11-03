@@ -1,0 +1,82 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    deployment.kubernetes.io/revision: "8"
+  creationTimestamp: "2022-11-03T04:13:53Z"
+  generation: 8
+  labels:
+    app: httpd
+  name: httpd
+  namespace: default
+  resourceVersion: "860103"
+  uid: 20c44472-5d9f-49f2-bacb-8d0232e18685
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: httpd
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: httpd
+    spec:
+      containers:
+      - image: httpd:2.4.54
+        imagePullPolicy: IfNotPresent
+        name: httpd
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /usr/local/apache2/conf/httpd.conf
+          name: config-volume
+          subPath: httpd.conf
+        - mountPath: /usr/local/apache2/htdocs/login.html
+          name: config-volume
+          subPath: login.html
+        - mountPath: /usr/local/apache2/htdocs/styles.css
+          name: config-volume
+          subPath: styles.css
+        - mountPath: //usr/local/apache2/htdocs/images
+          name: images-volume
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - configMap:
+          defaultMode: 420
+          name: httpd-config
+        name: config-volume
+      - name: images-volume
+        persistentVolumeClaim:
+          claimName: httpd-pv-claim
+status:
+  availableReplicas: 1
+  conditions:
+  - lastTransitionTime: "2022-11-03T04:14:06Z"
+    lastUpdateTime: "2022-11-03T05:34:59Z"
+    message: ReplicaSet "httpd-54599f8cf4" has successfully progressed.
+    reason: NewReplicaSetAvailable
+    status: "True"
+    type: Progressing
+  - lastTransitionTime: "2022-11-03T07:54:33Z"
+    lastUpdateTime: "2022-11-03T07:54:33Z"
+    message: Deployment has minimum availability.
+    reason: MinimumReplicasAvailable
+    status: "True"
+    type: Available
+  observedGeneration: 8
+  readyReplicas: 1
+  replicas: 1
+  updatedReplicas: 1
