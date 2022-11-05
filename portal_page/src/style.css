@@ -1,0 +1,14 @@
+body {
+  background: #6e28d9;
+  padding: 0 24px;
+  margin: 0;
+  height: 100vh;
+  color: white;
+  display: grid;
+  justify-content: left;
+  align-items: left;
+}
+button {
+  width: fit-content;
+  height: fit-content;
+}
