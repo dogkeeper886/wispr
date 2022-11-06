@@ -7,6 +7,6 @@ spec:
   - ReadWriteOnce
   storageClassName: manual
   hostPath:
-    path: "/mnt/data/httpd"
+    path: "/C/Users/Public/Documents/httpd"
   capacity:
     storage: 10Gi
