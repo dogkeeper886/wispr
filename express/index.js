@@ -27,14 +27,14 @@ app.post('/login', (req, res) => {
     const user_password = req.body.user_password
 
     // Get value from params
-    const nbi = params.get('nbiIP');
-    const requestURL = 'https://' + nbi + ':443/portalintf';
+    const nbi = params.get('nbiIP')
+    const requestURL = 'https://' + nbi + ':443/portalintf'
 
     // Prepare client authentication body
     let clientAuthenticationBody = {
         Vendor: 'Ruckus',
         RequestUserName: 'api',
-        RequestPassword: 'ADJELCvvKGV63W6U',
+        RequestPassword: 'tYZI2TPMpVdT6kSl',
         APIVersion: '1.0',
         RequestCategory: 'UserOnlineControl',
         RequestType: 'Login',
@@ -42,7 +42,7 @@ app.post('/login', (req, res) => {
         'UE-MAC': ue_mac,
         'UE-Username': user_name,
         'UE-Password': user_password,
-    };
+    }
 
     // Debug
     console.info(clientAuthenticationBody)
@@ -62,11 +62,12 @@ app.post('/login', (req, res) => {
         })
             .then((response) => response.json())
             .then((data) => {
-                console.log('Success:', data);
+                console.log('Success:', data)
+                res.send(JSON.stringify(data))
             })
             .catch((error) => {
-                console.error('Error:', error);
-            });
+                console.error('Error:', error)
+            })
     } else {
         console.info('Skip fetch')
         res.send(JSON.stringify(
