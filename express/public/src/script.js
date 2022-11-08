@@ -17,6 +17,7 @@ function login_button() {
         .then((response) => response.json())
         .then((data) => {
             console.log('Success:', data);
+            document.getElementById('result').innerHTML = data;
         })
         .catch((error) => {
             console.error('Error:', error);

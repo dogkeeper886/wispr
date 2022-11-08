@@ -69,9 +69,12 @@ app.post('/login', (req, res) => {
             });
     } else {
         console.info('Skip fetch')
+        res.send(JSON.stringify(
+            { status: 'Skip fetch' }
+        ))
     }
 
-    res.send('Login')
+    //res.send('Login')
 })
 
 
