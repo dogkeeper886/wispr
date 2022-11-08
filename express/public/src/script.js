@@ -2,14 +2,16 @@
 function login_button() {
     console.info('Click Login button')
 
+    // Prepare user information
     const data = {
         user_name: document.getElementById('user_name').value,
         user_password: document.getElementById('user_password').value,
         user_url: queryString
     }
 
+    // POST to backend
     fetch('/login', {
-        method: 'POST', // or 'PUT'
+        method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
@@ -18,7 +20,11 @@ function login_button() {
         .then((response) => response.json())
         .then((data) => {
             console.info('Success:', data)
+
+            // Read backend response
             document.getElementById('result').innerHTML = data.ReplyMessage
+
+            // Check login status
             if (data.ReplyMessage == 'Login succeeded') {
                 document.getElementById('login').disabled = true
                 document.getElementById('logout').disabled = false

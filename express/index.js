@@ -63,6 +63,8 @@ app.post('/login', (req, res) => {
             .then((response) => response.json())
             .then((data) => {
                 console.log('Success:', data)
+
+                // Send result to frontend
                 res.send(JSON.stringify(data))
             })
             .catch((error) => {
@@ -70,6 +72,8 @@ app.post('/login', (req, res) => {
             })
     } else {
         console.info('Skip fetch')
+
+        // Send result to frontend
         res.send(JSON.stringify(
             { status: 'Skip fetch' }
         ))
