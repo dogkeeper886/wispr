@@ -34,7 +34,7 @@ app.post('/login', (req, res) => {
     let clientAuthenticationBody = {
         Vendor: 'Ruckus',
         RequestUserName: 'api',
-        RequestPassword: 'tYZI2TPMpVdT6kSl',
+        RequestPassword: 'Zemoc6ANRZv8mffs',
         APIVersion: '1.0',
         RequestCategory: 'UserOnlineControl',
         RequestType: 'Login',
@@ -81,7 +81,6 @@ app.post('/login', (req, res) => {
 
     //res.send('Login')
 })
-
 
 // Listen on port
 app.listen(port, () => console.info('Listen on port', port))

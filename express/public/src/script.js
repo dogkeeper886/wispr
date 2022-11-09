@@ -27,7 +27,11 @@ function login_button() {
             // Check login status
             if (data.ReplyMessage == 'Login succeeded') {
                 document.getElementById('login').disabled = true
-                document.getElementById('logout').disabled = false
+                setTimeout(() => {
+                    location.reload(true)
+                }, 3 * 1000)
+                //location.reload(true)
+                //document.getElementById('redirect').innerHTML = 'Redirect'
             }
         })
         .catch((error) => {
@@ -36,11 +40,8 @@ function login_button() {
 
 }
 
-// Handle logout button event
-function logout_button () {
-    console.info('Click Logout button')
 
-}
+
 
 // Get URL
 const queryString = new URL(document.URL)
@@ -48,4 +49,3 @@ console.info(queryString)
 
 // Listen to click event
 document.getElementById('login').addEventListener('click', login_button)
-document.getElementById('logout').addEventListener('click', logout_button)
