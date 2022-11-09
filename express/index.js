@@ -2,7 +2,10 @@
 const express = require('express')
 const morgan = require('morgan')
 const app = express()
+
+// global varible
 const port = 8080
+const api_key = 'ADJELCvvKGV63W6U'
 
 // Log
 app.use(morgan('combined'))
@@ -14,7 +17,7 @@ app.use('/css', express.static(__dirname + 'p'))
 // Read json data
 app.use(express.json())
 
-// API
+// API login
 app.post('/login', (req, res) => {
     console.info(req.body)
 
@@ -34,7 +37,7 @@ app.post('/login', (req, res) => {
     let clientAuthenticationBody = {
         Vendor: 'Ruckus',
         RequestUserName: 'api',
-        RequestPassword: 'Zemoc6ANRZv8mffs',
+        RequestPassword: api_key,
         APIVersion: '1.0',
         RequestCategory: 'UserOnlineControl',
         RequestType: 'Login',
@@ -78,9 +81,68 @@ app.post('/login', (req, res) => {
             { status: 'Skip fetch' }
         ))
     }
-
-    //res.send('Login')
 })
+
+// API decrypt IP
+app.post('/decrypt_ip', (req, res) => {
+    console.info(req.body)
+
+    // Read varible from request body
+    const queryString = new URL(req.body.user_url)
+    const params = queryString.searchParams
+    const ue_ip = params.get('uip')
+
+    // Get value from params
+    const nbi = params.get('nbiIP')
+    const requestURL = 'https://' + nbi + ':443/portalintf'
+
+    // Prepare request body
+    let request_body = {
+        Vendor: 'Ruckus',
+        RequestUserName: 'api',
+        RequestPassword: api_key,
+        APIVersion: '1.0',
+        RequestCategory: 'GetConfig',
+        RequestType: 'DecryptIP',
+        'UE-IP': ue_ip,
+    }
+
+    // Debug
+    console.info(request_body)
+
+
+    // Check the nbiIP before fetch
+    if (nbi) {
+        console.info('Start to fetch')
+
+        // Request authentication
+        fetch(requestURL, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(request_body),
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                console.log('Success:', data)
+
+                // Send result to frontend
+                res.send(JSON.stringify(data))
+            })
+            .catch((error) => {
+                console.error('Error:', error)
+            })
+    } else {
+        console.info('Skip fetch')
+
+        // Send result to frontend
+        res.send(JSON.stringify(
+            { status: 'Skip fetch' }
+        ))
+    }
+})
+
 
 // Listen on port
 app.listen(port, () => console.info('Listen on port', port))
