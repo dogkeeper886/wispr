@@ -10,7 +10,8 @@ COPY express/package.json ./
 COPY express/package-lock.json ./
 COPY express/public ./
 COPY express/index.js ./
+COPY express/integration.key ./
 
 RUN npm install
 EXPOSE 8080
-CMD [ "echo", "$API_KEY", ">", "integration.key", "&&", "npm", "start" ]
+CMD [ "npm", "start" ]
