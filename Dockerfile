@@ -10,8 +10,7 @@ COPY express/package.json ./
 COPY express/package-lock.json ./
 COPY express/public ./
 COPY express/index.js ./
+COPY express/integration.key ./
 
-RUN cat ${API_KEY} > ./integration.key
 RUN npm install
-
 CMD [ "npm", "start" ]
