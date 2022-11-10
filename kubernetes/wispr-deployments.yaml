@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: wispr
+  name: wispr
+  namespace: default
+spec:
+  selector:
+    matchLabels:
+      app: wispr
+  template:
+    metadata:
+      labels:
+        app: wispr
+    spec:
+      containers:
+      - image: dogkeeper886/wispr:0.1
+        imagePullPolicy: IfNotPresent
+        name: wispr
+      env:
+      - name: API_KEY
+        value: "tYZI2TPMpVdT6kSl"        
