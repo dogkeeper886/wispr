@@ -8,7 +8,7 @@ WORKDIR /usr/src/app
 # where available (npm@5+)
 COPY express/package.json ./
 COPY express/package-lock.json ./
-COPY express/public/ ./
+COPY express/public ./
 COPY express/index.js ./
 
 RUN cat ${API_KEY} > ./integration.key
