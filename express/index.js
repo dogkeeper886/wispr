@@ -1,11 +1,26 @@
 // Import
 const express = require('express')
 const morgan = require('morgan')
-const app = express()
+const fs = require('fs');
+
+// Read key from file
+function read_integration_key(file_name) {
+    try {
+        const data = fs.readFileSync(file_name, 'utf8');
+        console.info('Read key from file');
+        return data;
+    } catch (err) {
+        console.error(err);
+    }
+}
 
 // global varible
 const port = 8080
-const api_key = 'ADJELCvvKGV63W6U'
+const integration_file_name = 'integration.key'
+const api_key = read_integration_key(integration_file_name)
+
+// Run express
+const app = express()
 
 // Log
 app.use(morgan('combined'))
@@ -65,7 +80,7 @@ app.post('/login', (req, res) => {
         })
             .then((response) => response.json())
             .then((data) => {
-                console.log('Success:', data)
+                console.info('Success:', data)
 
                 // Send result to frontend
                 res.send(JSON.stringify(data))
@@ -125,7 +140,7 @@ app.post('/decrypt_ip', (req, res) => {
         })
             .then((response) => response.json())
             .then((data) => {
-                console.log('Success:', data)
+                console.info('Success:', data)
 
                 // Send result to frontend
                 res.send(JSON.stringify(data))
