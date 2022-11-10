@@ -15,9 +15,7 @@ spec:
         app: wispr
     spec:
       containers:
-      - image: dogkeeper886/wispr:0.4
+      - image: dogkeeper886/wispr:0.44
         imagePullPolicy: IfNotPresent
         name: wispr
-        env:
-        - name: API_KEY
-          value: "tYZI2TPMpVdT6kSl"        
+      
