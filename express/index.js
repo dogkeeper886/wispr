@@ -17,7 +17,8 @@ function read_integration_key(file_name) {
 // global varible
 const port = 8080
 const integration_file_name = 'integration.key'
-const api_key = read_integration_key(integration_file_name)
+//const api_key = read_integration_key(integration_file_name)
+const api_key = process.env.API_KEY
 
 // Run express
 const app = express()
