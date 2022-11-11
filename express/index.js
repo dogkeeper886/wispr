@@ -3,21 +3,8 @@ const express = require('express')
 const morgan = require('morgan')
 const fs = require('fs');
 
-// Read key from file
-function read_integration_key(file_name) {
-    try {
-        const data = fs.readFileSync(file_name, 'utf8');
-        console.info('Read key from file');
-        return data;
-    } catch (err) {
-        console.error(err);
-    }
-}
-
 // global varible
 const port = 8080
-const integration_file_name = 'integration.key'
-//const api_key = read_integration_key(integration_file_name)
 const api_key = process.env.API_KEY
 
 // Run express
@@ -28,7 +15,6 @@ app.use(morgan('combined'))
 
 // Static file
 app.use(express.static('public'))
-app.use('/css', express.static(__dirname + 'p'))
 
 // Read json data
 app.use(express.json())
