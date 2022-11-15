@@ -27,4 +27,6 @@ spec:
             cpu: 250m
             ephemeral-storage: 1Gi
             memory: 512Mi        
-      
+        env:
+        - name: API_KEY
+          value: MY_API_KEY      
