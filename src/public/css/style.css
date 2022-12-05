@@ -1,0 +1,19 @@
+body {
+  background: #107896;
+  color: white;
+  font-family: "Gill Sans", sans-serif;
+}
+
+h1 {
+  text-align: center;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+}
+
+.container li {
+  display: block;
+  padding: 0.25em;
+}
