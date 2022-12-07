@@ -7,5 +7,10 @@
     <li><label for="user_password">Password:</label></li>
     <li><input type="password" id="user_password" name="user_password" value="Doe"></li>
     <li><input type="submit" id="login" value="Login"></li>
+    <li>
+      <% if (message) { %>
+        <%= message %>
+      <% } %>
+    </li>
   </ul>
 </form>
