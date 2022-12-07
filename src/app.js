@@ -2,7 +2,8 @@
 const express = require('express')
 const expressLayouts = require('express-ejs-layouts')
 const morgan = require('morgan')
-const fs = require('fs');
+const bodyParser = require('body-parser')
+const fetch = require('node-fetch')
 
 // global varible
 const api_key = process.env.API_KEY
@@ -11,9 +12,11 @@ const api_key = process.env.API_KEY
 const app = express()
 const port = process.env.EXPRESS_PORT
 app.listen(port, () => console.info('Listen on port', port))
-
-// Log
-app.use(morgan('combined'))
+app.set('view engine', 'ejs') // Set template engine
+app.use(expressLayouts)
+app.use(morgan('combined')) // Log
+app.use(express.json()) // Read json data
+app.use(bodyParser.urlencoded({ extended: true }))
 
 // Static file
 app.use(express.static('public'))
@@ -21,25 +24,21 @@ app.use('/css', express.static(__dirname + 'public/css'))
 app.use('/js', express.static(__dirname + 'public/js'))
 app.use('/img', express.static(__dirname + 'public/img'))
 
-// Set template engine
-app.use(expressLayouts)
-app.set('view engine', 'ejs')
-
-
 // Route
-app.get('', (req, res) => {
-    res.render('index')
+app.get('/', (req, res) => {
+    res.render('index', { user: '' })
 })
 
-// Read json data
-app.use(express.json())
+app.get('/login', (req, res) => {
+    res.render('login')
+})
 
-// API login
 app.post('/login', (req, res) => {
-    console.info(req.body)
+    console.info('POST request headers referer:', req.headers.referer)
+    console.info('POST request body:', req.body)
 
     // Read varible from request body
-    const queryString = new URL(req.body.user_url)
+    const queryString = new URL(req.headers.referer)
     const params = queryString.searchParams
     const ue_ip = params.get('uip')
     const ue_mac = params.get('client_mac')
@@ -48,6 +47,11 @@ app.post('/login', (req, res) => {
 
     // Get value from params
     const nbi = params.get('nbiIP')
+    if (nbi) {
+        console.info('nbiIP detected')
+    } else {
+        console.info('Skip fetch')
+    }
     const requestURL = 'https://' + nbi + ':443/portalintf'
 
     // Prepare client authentication body
@@ -63,13 +67,10 @@ app.post('/login', (req, res) => {
         'UE-Username': user_name,
         'UE-Password': user_password,
     }
+    console.info('Client authentication body:', JSON.stringify(clientAuthenticationBody, null, 4))
 
-    // Debug
-    console.info(clientAuthenticationBody)
-
-
-    // Check the nbiIP before fetch
-    if (nbi) {
+    try {
+        // Check the nbiIP before fetch
         console.info('Start to fetch')
 
         // Request authentication
@@ -85,20 +86,74 @@ app.post('/login', (req, res) => {
                 console.info('Success:', data)
 
                 // Send result to frontend
-                res.send(JSON.stringify(data))
+                //res.send(JSON.stringify(data))
+                res.render('submit', { result: JSON.stringify(data) })
             })
             .catch((error) => {
                 console.error('Error:', error)
             })
-    } else {
-        console.info('Skip fetch')
 
-        // Send result to frontend
-        res.send(JSON.stringify(
-            { status: 'Skip fetch' }
-        ))
+    } catch (error) {
+
     }
 })
 
+app.post('/submit', (req, res) => {
+    console.info('POST request headers referer:', req.headers.referer)
+    console.info('POST request body:', req.body)
 
+    // Read varible from request body
+    const queryString = new URL(req.headers.referer)
+    const params = queryString.searchParams
+    const ue_ip = params.get('uip')
+    const ue_mac = params.get('client_mac')
+    const user_name = req.body.user_name
+    const user_password = req.body.user_password
 
+    // Get value from params
+    const nbi = params.get('nbiIP')
+    if (nbi) {
+        console.info('nbiIP detected')
+    } else {
+        console.info('Skip fetch')
+    }
+    const requestURL = 'https://' + nbi + ':443/portalintf'
+
+    // Prepare client authentication body
+    let clientAuthenticationBody = {
+        Vendor: 'Ruckus',
+        RequestUserName: 'api',
+        RequestPassword: api_key,
+        APIVersion: '1.0',
+        RequestCategory: 'UserOnlineControl',
+        RequestType: 'Login',
+        'UE-IP': ue_ip,
+        'UE-MAC': ue_mac,
+        'UE-Username': user_name,
+        'UE-Password': user_password,
+    }
+    console.info('Client authentication body:', JSON.stringify(clientAuthenticationBody, null, 4))
+
+    // Check the nbiIP before fetch
+    console.info('Start to fetch')
+
+    // Request authentication
+    fetch(requestURL, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(clientAuthenticationBody),
+    })
+        .then((response) => response.json())
+        .then((data) => {
+            console.info('Success:', data)
+
+            // Send result to frontend
+            //res.send(JSON.stringify(data))
+            res.render('submit', { result: JSON.stringify(data) })
+        })
+        .catch((error) => {
+            console.error('Error:', error)
+        })
+})
