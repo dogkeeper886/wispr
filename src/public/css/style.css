@@ -17,3 +17,7 @@ h1 {
   display: block;
   padding: 0.25em;
 }
+
+p {
+  background-color: blue;
+}

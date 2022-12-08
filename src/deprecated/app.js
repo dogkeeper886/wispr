@@ -30,7 +30,11 @@ app.get('/', (req, res) => {
 })
 
 app.get('/login', (req, res) => {
-    res.render('login', { message: null })
+    res.render('login')
+})
+
+app.get('/message', (req, res) => {
+    res.render('message', { message: null })
 })
 
 function collectQuery(req, res, next) {
@@ -52,7 +56,7 @@ function collectQuery(req, res, next) {
         req.nbi = nbi
     } else {
         const message = 'No nbiIP detected in query string'
-        res.render('login', { message: message })
+        res.render('message', { message: message })
         return next('collectQuery: ' + message)
     }
     const requestURL = 'https://' + nbi + ':443/portalintf'
@@ -106,8 +110,7 @@ async function loginRequest(req, res, next) {
     if (req.loginResponse.ResponseCode == '200' || req.loginResponse.ResponseCode == '201') {
         res.render('submit', { result: JSON.stringify(req.loginResponse) })
     } else {
-        res.referer = req.headers.referer
-        res.render('login', { message: req.loginResponse.ReplyMessage })
+        res.render('message', { message: req.loginResponse.ReplyMessage })
     }
 
 

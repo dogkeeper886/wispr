@@ -1,0 +1,12 @@
+<h1>Login Page</h1>
+
+<form action="/login" class="container" method="post" target="message">
+  <ul>
+    <li><label for="user_name">User name:</label></li>
+    <li><input type="text" id="user_name" name="user_name" value="John"></li>
+    <li><label for="user_password">Password:</label></li>
+    <li><input type="password" id="user_password" name="user_password" value="Doe"></li>
+    <li><input type="submit" id="login" value="Login"></li>
+    <li><iframe src="/message" frameborder="0" name="message"></iframe></li>
+  </ul>
+</form>
