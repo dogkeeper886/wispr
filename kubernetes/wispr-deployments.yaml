@@ -15,7 +15,7 @@ spec:
         app: wispr
     spec:
       containers:
-      - image: dogkeeper886/wispr:0.57
+      - image: dogkeeper886/wispr:0.61
         imagePullPolicy: IfNotPresent
         name: wispr
         resources:
@@ -29,4 +29,24 @@ spec:
             memory: 512Mi        
         env:
         - name: API_KEY
-          value: MY_API_KEY      
+          valueFrom:
+            secretKeyRef:
+              name: wispr
+              key: API_KEY
+              optional: false
+        - name: TLS_CERT
+          valueFrom:
+            secretKeyRef:
+              name: my-tls-secret
+              key: tls.crt
+              optional: false
+        - name: TLS_KEY
+          valueFrom:
+            secretKeyRef:
+              name: my-tls-secret
+              key: tls.key
+              optional: false
+        - name: HTTP_PORT
+          value: "8080"
+        - name: HTTPS_PORT
+          value: "8443"          

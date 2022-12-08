@@ -4,14 +4,19 @@ const expressLayouts = require('express-ejs-layouts')
 const morgan = require('morgan')
 const bodyParser = require('body-parser')
 const fetch = require('node-fetch')
+const https = require('https')
+
 // global varible
 const api_key = process.env.API_KEY
-const port = process.env.EXPRESS_PORT
+const http_port = process.env.HTTP_PORT
+const https_port = process.env.HTTPS_PORT
+const tls_cert = process.env.TLS_CERT
+const tls_key = process.env.TLS_KEY
 
 // Run express
 const app = express()
 // Listen on port
-app.listen(port, () => console.info('Listen on port', port))
+app.listen(http_port, () => console.info('Listen on port', http_port))
 // Log
 app.use(morgan('dev'))
 // Read json data
@@ -21,6 +26,15 @@ app.use(bodyParser.urlencoded({ extended: true }))
 // Setup template engine
 app.set('view engine', 'ejs')
 app.use(expressLayouts)
+// Setup TLS
+https
+    .createServer({
+        key: tls_key,
+        cert: tls_cert
+    }, app)
+    .listen(https_port, () => {
+        console.info('Listen on port', https_port)
+    })
 
 // Static file
 app.use(express.static('public'))

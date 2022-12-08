@@ -9,6 +9,10 @@ spec:
   ports:
   - port: 8080
     protocol: TCP
+    name: http
+  - port: 8443
+    protocol: TCP
+    name: https
   selector:
     app: wispr
   type: NodePort
