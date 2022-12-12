@@ -6,3 +6,5 @@ HTTP_PORT="8080"</br>
 HTTPS_PORT="8443"</br>
 TLS_CERT=""</br>
 TLS_KEY=""</br>
+### Run
+Start server via command "npm start"
