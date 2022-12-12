@@ -5,6 +5,7 @@ const morgan = require('morgan')
 const bodyParser = require('body-parser')
 const fetch = require('node-fetch')
 const https = require('https')
+require('dotenv').config()
 
 // global varible
 const api_key = process.env.API_KEY
