@@ -39,9 +39,13 @@ https
 
 // Static file
 app.use(express.static('public'))
+
 // Render
 app.get('/index.html', (req, res) => {
     res.render('index')
+})
+app.get('/', (req, res) => {
+    res.redirect('/index.html')
 })
 function collectQuery(req, res, next) {
     //console.info('POST request headers referer:', req.headers.referer)

@@ -10,7 +10,7 @@ COPY src/package.json ./
 COPY src/package-lock.json ./
 COPY src/server.js ./
 COPY src/public ./public
-COPY src/views ./public
+COPY src/views ./views
 
 RUN npm install
 EXPOSE 8080
