@@ -69,11 +69,23 @@ body {
   border-radius: 0.3rem;
   padding: 0.3rem;
   border-width: 0.1rem;
+}
+
+.text-style,
+.title-style,
+.login-container li,
+.login-container input {
   font-family: "Gill Sans", sans-serif;
   color: white;
 }
 
-.page-title {
+.text-size,
+.login-container li,
+.login-container input {
+  font-size: large;
+}
+
+.title-size {
   font-size: xx-large;
 }
 
@@ -89,6 +101,5 @@ body {
 .login-container input {
   border-radius: 0.3rem;
   border-style: none;
-  color: white;
   background: rgba(0, 0, 0, 0.3)
 }
