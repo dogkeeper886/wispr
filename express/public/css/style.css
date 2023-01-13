@@ -8,11 +8,6 @@ body {
   padding: 0;
 }
 
-body {
-  color: white;
-  font-family: "Gill Sans", sans-serif;
-}
-
 .full-screen-container {
   position: relative;
   height: 100vh;
@@ -39,9 +34,6 @@ body {
   height: 100vh;
   justify-content: center;
 }
-
-
-
 
 .full-screen-container {
   width: 100vw;
@@ -77,6 +69,8 @@ body {
   border-radius: 0.3rem;
   padding: 0.3rem;
   border-width: 0.1rem;
+  font-family: "Gill Sans", sans-serif;
+  color: white;
 }
 
 .page-title {
@@ -90,4 +84,11 @@ body {
 
 .login-container li {
   margin-top: 0.3rem;
+}
+
+.login-container input {
+  border-radius: 0.3rem;
+  border-style: none;
+  color: white;
+  background: rgba(0, 0, 0, 0.3)
 }
