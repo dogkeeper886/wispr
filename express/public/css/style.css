@@ -74,7 +74,8 @@ body {
 .text-style,
 .title-style,
 .login-container li,
-.login-container input {
+.login-container input,
+footer a {
   font-family: "Gill Sans", sans-serif;
   color: white;
 }
@@ -102,4 +103,10 @@ body {
   border-radius: 0.3rem;
   border-style: none;
   background: rgba(0, 0, 0, 0.3)
+}
+
+footer {
+  position: fixed;
+  bottom: 0.5em;
+  right: 0.5em;
 }

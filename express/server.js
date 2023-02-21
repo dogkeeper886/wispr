@@ -47,6 +47,7 @@ app.get('/index.html', (req, res) => {
 app.get('/', (req, res) => {
     res.redirect('/index.html')
 })
+
 function collectQuery(req, res, next) {
     //console.info('POST request headers referer:', req.headers.referer)
     console.info('POST request body:', req.body)
