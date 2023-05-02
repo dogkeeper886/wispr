@@ -15,7 +15,7 @@ spec:
         app: wispr
     spec:
       containers:
-      - image: dogkeeper886/wispr:0.73
+      - image: dogkeeper886/wispr:0.74
         imagePullPolicy: IfNotPresent
         name: wispr
         resources:
