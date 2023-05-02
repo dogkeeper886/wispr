@@ -2,6 +2,16 @@
 function login_button() {
     console.info('Click Login button')
 
+    // Erase result text before start
+    function clearElement(elementId) {
+        const element = document.getElementById(elementId);
+        if (element) {
+            element.innerHTML = "";
+        }
+    }
+    clearElement("result");
+
+
     // Prepare user information
     const data = {
         user_name: document.getElementById('user_name').value,
