@@ -27,7 +27,7 @@ html {
 
 body {
   margin: 0;
-  padding: 0 var(--main-padding);
+  padding: 0;
 }
 
 .full-screen-container {
@@ -146,6 +146,7 @@ footer {
   flex-wrap: wrap;
   gap: 1rem;
   justify-content: center;
+  padding: var(--main-padding);
 }
 
 .login-second-section,
