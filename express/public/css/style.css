@@ -1,6 +1,7 @@
 :root {
   --main-padding: 1rem;
   --main-max-width: 400px;
+  --main-font-size-large: large;
 }
 
 * {
@@ -139,6 +140,17 @@ footer {
 .login-second-section,
 .login-first-section {
   flex-basis: var(--main-max-width);
+}
+
+.login-form label{
+  font-size: var(--main-font-size-large);
+  font-weight: 600;
+}
+
+input#user_name,
+input#user_password,
+input#login {
+  font-size: var(--main-font-size-large);
 }
 
 p.login-username,
