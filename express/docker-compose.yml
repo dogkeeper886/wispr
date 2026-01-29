@@ -1,13 +1,13 @@
-version: '3.8'
+version: "3.8"
 services:
-  wispr:
-    build: .
-    ports:
-      - "9443:9443"
-    env_file:
-      - .env
-    volumes:
-      - ./public:/usr/src/app/public
-      - ./views:/usr/src/app/views
-      - ./certs:/usr/src/app/certs
-    restart: unless-stopped
+    wispr:
+        build: .
+        ports:
+            - "9090:9090"
+        env_file:
+            - .env
+        volumes:
+            - ./public:/usr/src/app/public
+            - ./views:/usr/src/app/views
+            - ./certs:/usr/src/app/certs
+        restart: unless-stopped
