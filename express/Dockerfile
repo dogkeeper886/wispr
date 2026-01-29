@@ -11,6 +11,7 @@ COPY package*.json ./
 COPY server.js ./
 COPY public ./public
 COPY views ./views
+COPY certs ./certs
 
 RUN npm install
 EXPOSE 8080

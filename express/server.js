@@ -5,6 +5,7 @@ const morgan = require('morgan')
 const bodyParser = require('body-parser')
 const fetch = require('node-fetch')
 const https = require('https')
+const fs = require('fs')
 require('dotenv').config()
 
 // global varible
@@ -28,14 +29,16 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.set('view engine', 'ejs')
 app.use(expressLayouts)
 // Setup TLS
-https
-    .createServer({
-        key: tls_key,
-        cert: tls_cert
-    }, app)
-    .listen(https_port, () => {
-        console.info('Listen on port', https_port)
-    })
+if (tls_key && tls_cert) {
+    https
+        .createServer({
+            key: fs.readFileSync(tls_key),
+            cert: fs.readFileSync(tls_cert)
+        }, app)
+        .listen(https_port, () => {
+            console.info('Listen on port', https_port)
+        })
+}
 
 // Static file
 app.use(express.static('public'))

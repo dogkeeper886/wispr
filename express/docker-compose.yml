@@ -3,11 +3,11 @@ services:
   wispr:
     build: .
     ports:
-      - "9080:8080"
-      - "9443:8443"
+      - "9443:9443"
     env_file:
       - .env
     volumes:
       - ./public:/usr/src/app/public
       - ./views:/usr/src/app/views
+      - ./certs:/usr/src/app/certs
     restart: unless-stopped
