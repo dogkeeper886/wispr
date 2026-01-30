@@ -28,3 +28,13 @@ npm-debug.log*
 
 # TypeScript cache
 *.tsbuildinfo
+
+# Certificates (never commit private keys)
+certs/
+
+# Playwright test artifacts
+.playwright-mcp/
+
+# Root-level npm files (for local testing only)
+/package.json
+/package-lock.json

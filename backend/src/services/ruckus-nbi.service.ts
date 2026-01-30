@@ -65,7 +65,7 @@ class RuckusNBIService {
         res.on('end', () => {
           try {
             const response = JSON.parse(data) as NBIResponse;
-            logger.debug('NBI response received', { response });
+            logger.info('NBI response received', { response });
             resolve(response);
           } catch (error) {
             logger.error('Failed to parse NBI response', { data, error });
