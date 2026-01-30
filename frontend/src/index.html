@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Wi-Fi Portal</title>
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📶</text></svg>">
+</head>
+<body>
+  <div class="login-container">
+    <section class="login-first-section">
+      <h2 class="login-title">Portal Page</h2>
+      <p class="login-description">
+        Welcome to our Wi-Fi network! To access the Internet, please enter the login
+        credentials. Once you're connected, you'll be able to browse the web, check email,
+        or catch up on social media. We hope you enjoy your time on our network!
+      </p>
+    </section>
+    <section class="login-second-section">
+      <form class="login-form" id="loginForm">
+        <p class="login-username">
+          <label for="username">Username</label>
+          <input type="text" name="username" id="username" required autocomplete="username">
+        </p>
+        <p class="login-password">
+          <label for="password">Password</label>
+          <input type="password" name="password" id="password" required autocomplete="current-password">
+        </p>
+        <p class="login-button">
+          <input type="submit" name="login" id="login" value="Log In">
+        </p>
+        <p id="result" class="result-message"></p>
+      </form>
+    </section>
+  </div>
+  <footer>
+    <a href="https://github.com" target="_blank" rel="noopener noreferrer">WISPr Portal</a>
+  </footer>
+  <script type="module" src="./js/portal.ts"></script>
+</body>
+</html>

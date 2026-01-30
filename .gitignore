@@ -1,5 +1,30 @@
+# Dependencies
 node_modules/
+**/node_modules/
+
+# Build output
+backend/dist/
+frontend/dist/
+
+# Test artifacts
 test-results/
-package.json
-package-lock.json
+coverage/
+
+# Environment files
 .env
+**/.env
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+
+# TypeScript cache
+*.tsbuildinfo

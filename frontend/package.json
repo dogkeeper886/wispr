@@ -1,0 +1,22 @@
+{
+  "name": "wispr-frontend",
+  "version": "1.0.0",
+  "description": "WISPr Captive Portal Frontend",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit"
+  },
+  "keywords": [
+    "wispr",
+    "captive-portal"
+  ],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "typescript": "^5.5.0",
+    "vite": "^5.4.0"
+  }
+}
