@@ -84,7 +84,8 @@ export interface NBIResponse {
   APIVersion?: string;
   ResponseCategory?: string;
   ResponseType?: string;
-  ReplyCode?: number;
+  ResponseCode?: number;
+  ReplyCode?: number; // Alias for ResponseCode
   ReplyMessage?: string;
   'UE-IP'?: string;
   'UE-MAC'?: string;

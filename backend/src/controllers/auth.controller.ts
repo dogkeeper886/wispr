@@ -12,10 +12,12 @@ import type {
 } from '../validators/auth.validator';
 
 function mapNBIResponse(nbiResponse: NBIResponse): APIResponse<NBIResponse> {
-  const success = nbiResponse.ReplyCode === NBI_REPLY_CODES.SUCCESS;
+  // NBI returns ResponseCode, not ReplyCode
+  const responseCode = nbiResponse.ResponseCode ?? nbiResponse.ReplyCode;
+  const success = responseCode === NBI_REPLY_CODES.SUCCESS;
   return {
     success,
-    code: nbiResponse.ReplyCode || HTTP_STATUS.OK,
+    code: responseCode || HTTP_STATUS.OK,
     message: nbiResponse.ReplyMessage || (success ? 'Success' : 'Failed'),
     data: nbiResponse,
   };
